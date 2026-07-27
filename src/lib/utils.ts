@@ -7,7 +7,8 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
 
-const ILLEGAL_FILENAME_CHARS = /[/\\:*?"<>|-\u001f]/g
+// Hyphen is escaped so TypeScript does not parse it as a character range.
+const ILLEGAL_FILENAME_CHARS = /[\x00-\x1F\\/:*?"<>|\-]/g
 
 export function sanitizeFilename(input: string): string {
   const collapsed = input.replace(ILLEGAL_FILENAME_CHARS, "").replace(/\s+/g, " ").trim()
