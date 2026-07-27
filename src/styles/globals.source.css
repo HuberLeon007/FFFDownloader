@@ -1,6 +1,8 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
+:root {
   --color-surface-base: #09090b;
   --color-surface-card: #111114;
   --color-surface-raised: #17171b;
@@ -12,9 +14,6 @@
   --color-ink: #fafafa;
   --color-ink-muted: #a1a1aa;
   --color-ink-faint: #71717a;
-  --radius-card: 10px;
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
 }
 
 html,
@@ -26,7 +25,7 @@ body {
   overflow: hidden;
   background: var(--color-surface-base);
   color: var(--color-ink);
-  font-family: var(--font-sans);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
   font-size: 13px;
   -webkit-font-smoothing: antialiased;
 }
@@ -111,9 +110,7 @@ body {
   border: 1.5px solid #52525b;
   background: transparent;
   cursor: pointer;
-  transition:
-    border-color 0.15s ease,
-    background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
 }
 .hdl-check:hover {
   border-color: var(--color-accent);
