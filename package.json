@@ -1,0 +1,51 @@
+{
+  "name": "harvestdl",
+  "displayName": "HarvestDL",
+  "version": "0.1.0",
+  "description": "Configurable link harvester that hands downloads to your external download manager.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "plasmo dev",
+    "dev:firefox": "plasmo dev --target=firefox-mv3",
+    "build": "plasmo build",
+    "build:chrome": "plasmo build --target=chrome-mv3 --zip",
+    "build:firefox": "plasmo build --target=firefox-mv3 --zip",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.0.0",
+    "lucide-react": "^0.460.0",
+    "motion": "^12.0.0",
+    "plasmo": "^0.90.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^2.5.5",
+    "webextension-polyfill": "^0.12.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/chrome": "^0.0.287",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/webextension-polyfill": "^0.12.1",
+    "jsdom": "^25.0.1",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.1.0"
+  },
+  "manifest": {
+    "permissions": ["downloads", "storage", "activeTab", "scripting"],
+    "host_permissions": ["<all_urls>"],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "harvestdl@local",
+        "strict_min_version": "115.0"
+      }
+    }
+  }
+}
