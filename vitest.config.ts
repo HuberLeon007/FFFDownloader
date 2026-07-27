@@ -1,13 +1,12 @@
 import { defineConfig } from "vitest/config"
-import path from "node:path"
 
 export default defineConfig({
   resolve: {
     alias: {
-      "~": path.resolve(process.cwd(), "src"),
-      "~lib": path.resolve(process.cwd(), "src/lib"),
-      "~types": path.resolve(process.cwd(), "src/types"),
-      "~popup": path.resolve(process.cwd(), "src/popup")
+      "~": "./src",
+      "~lib": "./src/lib",
+      "~types": "./src/types",
+      "~popup": "./src/popup"
     }
   },
   test: {
