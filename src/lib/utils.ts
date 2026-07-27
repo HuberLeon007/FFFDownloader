@@ -7,8 +7,7 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
 
-// Hyphen is last in the character class so it is treated literally.
-const ILLEGAL_FILENAME_CHARS = /[/\\:*?"<>|-\u001f-]/g
+const ILLEGAL_FILENAME_CHARS = /[/\\:*?"<>|-\u001f]/g
 
 export function sanitizeFilename(input: string): string {
   const collapsed = input.replace(ILLEGAL_FILENAME_CHARS, "").replace(/\s+/g, " ").trim()
