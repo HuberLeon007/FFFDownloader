@@ -14,6 +14,9 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
+  "overrides": {
+    "jiti": "1.21.0"
+  },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -28,6 +31,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.287",
+    "@types/node": "^22.10.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@types/webextension-polyfill": "^0.12.1",
