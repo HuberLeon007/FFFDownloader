@@ -1,9 +1,14 @@
 import { defineConfig } from "vitest/config"
-import { resolve } from "node:path"
+import path from "node:path"
 
 export default defineConfig({
   resolve: {
-    alias: { "~": resolve(__dirname, "./src") }
+    alias: {
+      "~": path.resolve(process.cwd(), "src"),
+      "~lib": path.resolve(process.cwd(), "src/lib"),
+      "~types": path.resolve(process.cwd(), "src/types"),
+      "~popup": path.resolve(process.cwd(), "src/popup")
+    }
   },
   test: {
     environment: "jsdom",
