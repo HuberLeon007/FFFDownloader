@@ -7,6 +7,7 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "jsx": "react-jsx",
+    "types": ["node", "chrome"],
     "paths": {
       "~*": ["./src/*"]
     },
