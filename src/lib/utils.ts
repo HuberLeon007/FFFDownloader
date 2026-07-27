@@ -7,7 +7,8 @@ export function cn(...inputs: ClassValue[]): string {
   return twMerge(clsx(inputs))
 }
 
-const ILLEGAL_FILENAME_CHARS = /[/\\:*?"<>|-\u001f]/g
+// Hyphen is last in the character class so it is treated literally.
+const ILLEGAL_FILENAME_CHARS = /[/\\:*?"<>|-\u001f-]/g
 
 export function sanitizeFilename(input: string): string {
   const collapsed = input.replace(ILLEGAL_FILENAME_CHARS, "").replace(/\s+/g, " ").trim()
@@ -37,13 +38,7 @@ export function truncate(value: string, max: number): string {
 }
 
 export function slugify(value: string): string {
-  return (
-    value
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 80) || "entry"
-  )
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 80) || "entry"
 }
 
 export function capitalize(value: string): string {
@@ -51,10 +46,6 @@ export function capitalize(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
-/**
- * Compiles a user pattern. `/foo/i` becomes a RegExp, anything else is a
- * case-insensitive substring test. Invalid regexes degrade to substring.
- */
 export function toMatcher(pattern: string): (value: string) => boolean {
   const trimmed = pattern.trim()
   if (trimmed.length === 0) return () => false
@@ -65,7 +56,7 @@ export function toMatcher(pattern: string): (value: string) => boolean {
       const re = new RegExp(body as string, (flags ?? "").replace(/g/g, ""))
       return (value: string) => re.test(value)
     } catch {
-      // fall through to substring
+      // Invalid regexes degrade to substring matching.
     }
   }
   const needle = trimmed.toLowerCase()
@@ -76,7 +67,6 @@ export function matchesAny(patterns: string[], value: string): boolean {
   return patterns.some((pattern) => toMatcher(pattern)(value))
 }
 
-/** Returns the RegExp match for a pattern so labels can use capture groups. */
 export function execPattern(pattern: string, value: string): RegExpExecArray | null {
   const trimmed = pattern.trim()
   const regexMatch = /^\/(.+)\/([gimsuy]*)$/.exec(trimmed)
@@ -120,13 +110,11 @@ export function normalizeHostname(value: string): string {
   return value.trim().toLowerCase().replace(/^www\./, "")
 }
 
-/** True when `hostname` equals a listed domain or is a subdomain of it. */
 export function hostMatchesDomains(hostname: string, domains: string[]): boolean {
   const host = normalizeHostname(hostname)
   return domains.some((raw) => {
     const domain = normalizeHostname(raw)
-    if (!domain) return false
-    return host === domain || host.endsWith(`.${domain}`)
+    return Boolean(domain) && (host === domain || host.endsWith(`.${domain}`))
   })
 }
 
